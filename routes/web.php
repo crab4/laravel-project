@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
+
+Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
+Route::get('/posts/read', [\App\Http\Controllers\PostController::class, 'read'])->name('posts.read');
+Route::get('/posts/update', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+Route::get('/posts/delete', [\App\Http\Controllers\PostController::class, 'delete'])->name('posts.delete');
+
+Route::get('/main', [\App\Http\Controllers\MainController::class, 'index'])->name('main.index');
+Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about.index');
+Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
+Route::get('/pricing', [\App\Http\Controllers\PricingController::class, 'index'])->name('pricing.index');
