@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index(){
       $post = Post::find(3);
       $tags = $post->tags;
-      dd($tags[0]->posts);
+      dd($tags);
 
     }
 }
