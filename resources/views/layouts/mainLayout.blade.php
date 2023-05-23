@@ -8,59 +8,70 @@
     <title>Document</title>
 </head>
 
-<body class="p-4">
-    <wrapper>
-        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+<body>
+    <wrapper class="flex flex-col">
+        <nav class="bg-gray-200 border-gray-200 dark:bg-gray-900 ">
 
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <button data-collapse-toggle="navbar-default" type="button"
-                    class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-default" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul
-                        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        class="font-medium flex p-4 md:p-0 mt-4 border border-gray-100  bg-gray-200 flex-row space-x-8 md:mt-0 border-0  md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a href="{{route('main.index')}}"
+                            <a href="{{ route('main.index') }}"
                                 class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                                 aria-current="page">Main</a>
                         </li>
                         <li>
-                            <a href="{{route('about.index')}}"
+                            <a href="{{ route('about.index') }}"
                                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
                         </li>
                         <li>
-                            <a href="{{route('pricing.index')}}"
+                            <a href="{{ route('pricing.index') }}"
                                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
                         </li>
                         <li>
-                            <a href="{{route('contact.index')}}"
+                            <a href="{{ route('contact.index') }}"
                                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 indent-2">
-            <li><a href="{{ route('posts.create') }}">Create default</a></li>
-            <li><a href="{{ route('posts.update') }}">Update default</a></li>
-            <li><a href="{{ route('posts.read') }}">Read default</a></li>
-            <li><a href="{{ route('posts.delete') }}">Delete Default</a></li>
-        </ul>
-        <div>
-            @yield('content')
+        <div class="flex ">
+            <aside id="default-sidebar"
+                class="z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+                <div class="h-full px-3 py-4 overflow-y-auto bg-gray-300 dark:bg-gray-800">
+                    <ul class="space-y-2 font-medium">
+                        <li>
+                            <a href="{{ route('posts.index') }}"
+                                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                </svg>
+                                <span class="ml-3">Posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('categories.index') }}"
+                                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="flex-1 ml-3 whitespace-nowrap">Categories</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="flex-1 ml-3 whitespace-nowrap">Edit</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <span class="flex-1 ml-3 whitespace-nowrap">Show</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+              @yield('content')
         </div>
-        <div>
-            @yield('crudList')
-        </div>
-        <br>
 
     </wrapper>
 </body>

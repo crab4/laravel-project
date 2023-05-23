@@ -16,11 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
   return view('welcome');
 });
-
+Route::get('/posts/index', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
-Route::get('/posts/read', [\App\Http\Controllers\PostController::class, 'read'])->name('posts.read');
-Route::get('/posts/update', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
-Route::get('/posts/delete', [\App\Http\Controllers\PostController::class, 'delete'])->name('posts.delete');
+Route::post('/posts/store', [\App\Http\Controllers\PostController::class, 'store'])->name('post.store');
+Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}/edit', [\App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+Route::patch('/posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{post}/', [\App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::get('/categories/index',[\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
+
 
 Route::get('/main', [\App\Http\Controllers\MainController::class, 'index'])->name('main.index');
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about.index');

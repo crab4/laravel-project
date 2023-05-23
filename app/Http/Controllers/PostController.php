@@ -9,80 +9,66 @@ class PostController extends Controller
 {
 
 
-  public function read($id = -1)
+  public function index()
   {
-    if ($id == -1) {
-      $post = Post::first();
-    } else {
-      $post = Post::where('id', $id)->get();
-    }
-    // $returnString=[];
-    // foreach($post->toArray() as $property => $value){
-    //   array_push($returnString,"{$property}: {$value}");
-    // }
-    $post = $post->toArray();
-    $post["Operation"] = "Read";
-    //dump($returnString);
-    return view('crud', compact('post'));
-  }
-  public function create(
-    $title = "Default Title",
-    $content = "default Exercitation laboris exercitation reprehenderit laboris cillum quis et velit laboris irure est consectetur ipsum.",
-    $description = "default description",
-    $image = "default image",
-    $likes = 0,
-    $is_published = true
-  ) {
-
-    $post = [
-      'title' => $title,
-      'content' => $content,
-      'description' => $description,
-      'image' => $image,
-      'likes' => $likes,
-      'is_published' => $is_published
-    ];
-    Post::create($post);
-    $post["Operation"] = "Read";
-    return view('crud', compact('post'));
+    $posts = Post::all();
+    return view('post.index', compact('posts'));
   }
 
-  public function update(
-    $id = -1,
-    $title = "Default Update Title",
-    $content = "default Exercitation laboris exercitation reprehenderit laboris cillum quis et velit laboris irure est consectetur ipsum.",
-    $description = "default description",
-    $image = "default image",
-    $likes = 0,
-    $is_published = true
-  ) {
-    $post = [
-      'title' => $title,
-      'content' => $content,
-      'description' => $description,
-      'image' => $image,
-      'likes' => $likes,
-      'is_published' => $is_published
-    ];
-    if ($id == -1) {
-      Post::first()->update($post);
-    } else {
-      Post::where('id', $id)->update($post);
-    }
-    $post["Operation"] = "Update";
-    return view('crud', compact('post'));
-  }
-
-  public function delete($id = -1)
+  public function create()
   {
-    if ($id == -1) {
-      Post::first()->delete();
-    } else {
-      Post::where('id', $id)->delete();
-    }
-    $post["Operation"] = "delete";
-    $post["Id"] = "$id";
-    //dump($returnString);
-    return view('crud', compact('post'));
+    return view('post.create');
   }
+
+  public function store()
+  {
+    $data = request()->validate([
+      'title' => 'string',
+      'content' => 'string',
+      'description' => 'string',
+      'image' => 'string',
+    ]);
+    $data['likes'] = 0;
+    $data['is_published'] = 1;
+    Post::create($data);
+    return redirect()->route('posts.index');
+  }
+
+  public function show(Post $post)
+  {
+    // dd($post->is_published);
+    return view('post.show', compact('post'));
+  }
+  public function edit(Post $post)
+  {
+    //  dd($post->is_published);
+    return view('post.edit', compact('post'));
+  }
+
+  public function update(Post $post)
+  {
+    $data = request()->validate([
+      'title' => 'string',
+      'content' => 'string',
+      'description' => 'string',
+      'image' => 'string',
+      'likes' => 'integer',
+      'is_published' => 'string',
+    ]);
+    if ($data['is_published'] == 'on'){
+      $data['is_published'] = 1;
+    } else{
+      $data['is_published'] = 0;
+    }
+    Post::find($post->id)->update($data);
+    return redirect()->route('posts.show', $post->id);
+  }
+
+  public function destroy(Post $post){
+    //dd($post);
+    
+    Post::find($post->id)->delete();
+    return redirect()->route('posts.index');
+  }
+
 }
